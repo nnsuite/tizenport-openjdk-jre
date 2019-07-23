@@ -37,21 +37,25 @@ cp %{SOURCE2000} .
 # armv7l / armel
 %ifarch armv7l
 %define archivepath %{_builddir}/%{name}-%{version}/openjdk-8-jre-headless_8u222-b10-1/armel/data.tar
+%define keyword armel
 %endif
 
 # aarch64 / arm64
 %ifarch aarch64
 %define archivepath %{_builddir}/%{name}-%{version}/openjdk-8-jre-headless_8u222-b10-1/arm64/data.tar
+%define keyword arm64
 %endif
 
 # x86_64 / amd64
 %ifarch x86_64
 %define archivepath %{_builddir}/%{name}-%{version}/openjdk-8-jre-headless_8u222-b10-1/amd64/data.tar
+%define keyword amd64
 %endif
 
 # ix86 / i386
 %ifarch %ix86
 %define archivepath %{_builddir}/%{name}-%{version}/openjdk-8-jre-headless_8u222-b10-1/i386/data.tar
+%define keyword i386
 %endif
 
 pushd %{buildroot}
@@ -64,6 +68,12 @@ pushd lib
 rm -rf debug
 popd
 popd
+
+mkdir -p %{buildroot}%{_libdir}
+pushd %{buildroot}%{_libdir}
+ln -sf /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/jli/libjli.so libjli.so
+popd
+
 popd
 
 %files
@@ -83,6 +93,7 @@ Provides libjli only
 %files libjli
 %manifest openjdk-jre.manifest
 /usr/lib/jvm/java-8-openjdk-*/jre/lib/*/jli
+%{_libdir}/libjli.so
 
 %post libjli
 /usr/sbin/ldconfig
