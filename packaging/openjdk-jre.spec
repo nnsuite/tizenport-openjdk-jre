@@ -38,24 +38,28 @@ cp %{SOURCE2000} .
 %ifarch armv7l
 %define archivepath %{_builddir}/%{name}-%{version}/openjdk-8-jre-headless_8u222-b10-1/armel/data.tar
 %define keyword armel
+%define keyword2 arm
 %endif
 
 # aarch64 / arm64
 %ifarch aarch64
 %define archivepath %{_builddir}/%{name}-%{version}/openjdk-8-jre-headless_8u222-b10-1/arm64/data.tar
 %define keyword arm64
+%define keyword2 aarch64
 %endif
 
 # x86_64 / amd64
 %ifarch x86_64
 %define archivepath %{_builddir}/%{name}-%{version}/openjdk-8-jre-headless_8u222-b10-1/amd64/data.tar
 %define keyword amd64
+%define keyword2 amd64
 %endif
 
 # ix86 / i386
 %ifarch %ix86
 %define archivepath %{_builddir}/%{name}-%{version}/openjdk-8-jre-headless_8u222-b10-1/i386/data.tar
 %define keyword i386
+%define keyword2 i386
 %endif
 
 pushd %{buildroot}
@@ -71,10 +75,10 @@ popd
 
 mkdir -p %{buildroot}%{_libdir}
 pushd %{buildroot}%{_libdir}
-ln -sf /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/jli/libjli.so libjli.so
-ln -sf /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/server/libjvm.so libjvm.so
-ln -sf /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libverify.so libverify.so
-ln -sf /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjava.so libjava.so
+ln -sf /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/jli/libjli.so libjli.so
+ln -sf /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/server/libjvm.so libjvm.so
+ln -sf /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libverify.so libverify.so
+ln -sf /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libjava.so libjava.so
 popd
 
 popd
@@ -84,21 +88,21 @@ popd
 %defattr(-,root,root,-)
 /usr/lib/jvm
 /etc/java-8-openjdk
-%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/jli
-%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/server/libjvm.so
-%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libverify.so
-%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjava.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/jli
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/server/libjvm.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libverify.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libjava.so
 
 # extra
-%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjawt.so
-%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libawt_xawt.so
-%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libj2pcsc.so
-%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjavajpeg.so
-%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libfontmanager.so
-%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjavalcms.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libjawt.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libawt_xawt.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libj2pcsc.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libjavajpeg.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libfontmanager.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libjavalcms.so
 #extra libc6 2.28
-%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libsctp.so
-%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libnio.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libsctp.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libnio.so
 
 
 %post -p /usr/sbin/ldconfig
@@ -111,9 +115,9 @@ Provides libjli only
 %files essentials
 %manifest openjdk-jre.manifest
 /usr/lib/jvm/java-8-openjdk-*/jre/lib/*/jli
-/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/server/libjvm.so
-/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libverify.so
-/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjava.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/server/libjvm.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libverify.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libjava.so
 %{_libdir}/*
 
 %post essentials
@@ -126,11 +130,11 @@ Summary:	Extra JRE files that may break Tizen
 %description extra
 Do not install
 %files extra
-/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjawt.so
-/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libawt_xawt.so
-/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libj2pcsc.so
-/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjavajpeg.so
-/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libfontmanager.so
-/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjavalcms.so
-/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libsctp.so
-/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libnio.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libjawt.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libawt_xawt.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libj2pcsc.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libjavajpeg.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libfontmanager.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libjavalcms.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libsctp.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libnio.so
