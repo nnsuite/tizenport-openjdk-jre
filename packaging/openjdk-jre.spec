@@ -72,6 +72,9 @@ popd
 mkdir -p %{buildroot}%{_libdir}
 pushd %{buildroot}%{_libdir}
 ln -sf /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/jli/libjli.so libjli.so
+ln -sf /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/server/libjvm.so libjvm.so
+ln -sf /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libverify.so libverify.so
+ln -sf /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjava.so libjava.so
 popd
 
 popd
@@ -81,21 +84,27 @@ popd
 %defattr(-,root,root,-)
 /usr/lib/jvm
 /etc/java-8-openjdk
-%exclude /usr/lib/jvm/java-8-openjdk-*/jre/lib/*/jli
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/jli
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/server/libjvm.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libverify.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjava.so
 
 %post -p /usr/sbin/ldconfig
 %postun -p /usr/sbin/ldconfig
 
-%package libjli
+%package essentials
 Summary:	Provide libjli only for openjdk-jdk
-%description libjli
+%description essentials
 Provides libjli only
-%files libjli
+%files essentials
 %manifest openjdk-jre.manifest
 /usr/lib/jvm/java-8-openjdk-*/jre/lib/*/jli
-%{_libdir}/libjli.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/server/libjvm.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libverify.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjava.so
+%{_libdir}/*
 
-%post libjli
+%post essentials
 /usr/sbin/ldconfig
-%postun libjli
+%postun essentials
 /usr/sbin/ldconfig
