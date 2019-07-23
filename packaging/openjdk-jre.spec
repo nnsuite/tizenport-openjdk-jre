@@ -71,3 +71,20 @@ popd
 %defattr(-,root,root,-)
 /usr/lib/jvm
 /etc/java-8-openjdk
+%exclude /usr/lib/jvm/java-8-openjdk-*/jre/lib/*/jli
+
+%post -p /usr/sbin/ldconfig
+%postun -p /usr/sbin/ldconfig
+
+%package libjli
+Summary:	Provide libjli only for openjdk-jdk
+%description libjli
+Provides libjli only
+%files libjli
+%manifest openjdk-jre.manifest
+/usr/lib/jvm/java-8-openjdk-*/jre/lib/*/jli
+
+%post libjli
+/usr/sbin/ldconfig
+%postun libjli
+/usr/sbin/ldconfig
