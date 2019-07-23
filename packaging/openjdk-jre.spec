@@ -118,7 +118,7 @@ Provides libjli only
 /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/server/libjvm.so
 /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libverify.so
 /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libjava.so
-%{_libdir}/*
+%{_libdir}/*.so
 
 %post essentials
 /usr/sbin/ldconfig
