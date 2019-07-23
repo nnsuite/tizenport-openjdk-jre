@@ -89,6 +89,18 @@ popd
 %exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libverify.so
 %exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjava.so
 
+# extra
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjawt.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libawt_xawt.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libj2pcsc.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjavajpeg.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libfontmanager.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjavalcms.so
+#extra libc6 2.28
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libsctp.so
+%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libnio.so
+
+
 %post -p /usr/sbin/ldconfig
 %postun -p /usr/sbin/ldconfig
 
@@ -108,3 +120,17 @@ Provides libjli only
 /usr/sbin/ldconfig
 %postun essentials
 /usr/sbin/ldconfig
+
+%package extra
+Summary:	Extra JRE files that may break Tizen
+%description extra
+Do not install
+%files extra
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjawt.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libawt_xawt.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libj2pcsc.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjavajpeg.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libfontmanager.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libjavalcms.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libsctp.so
+/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword}/libnio.so
