@@ -100,10 +100,6 @@ popd
 %exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libjavajpeg.so
 %exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libfontmanager.so
 %exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libjavalcms.so
-#extra libc6 2.28
-%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libsctp.so
-%exclude /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libnio.so
-
 
 %post -p /usr/sbin/ldconfig
 %postun -p /usr/sbin/ldconfig
@@ -136,5 +132,3 @@ Do not install
 /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libjavajpeg.so
 /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libfontmanager.so
 /usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libjavalcms.so
-/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libsctp.so
-/usr/lib/jvm/java-8-openjdk-%{keyword}/jre/lib/%{keyword2}/libnio.so
